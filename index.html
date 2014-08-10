@@ -17,14 +17,7 @@ body {
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
-var url = "https://script.google.com/macros/s/AKfycbzEEX2A5pMpNCabyQPu58I0yOCfmIfYGRzVl0DAUQIGsMLl6CAY/exec";
-var ss_url="https://docs.google.com/spreadsheets/d/15UvknHaeN9wqJBVbPERuNU5BvQrPPpgipp7mkmVfHjg/edit#gid=0";
-$.getJSON(url+"?callback=?",{method:ss_url}, function(x) {
 
-  // x[1][2] contains the data in cell C2
-  alert(x[1][1]);
-
- }
 var matrix = [
   [11975,  5871, 8916, 2868],
   [ 1951, 10048, 2060, 6171],
