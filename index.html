@@ -33,9 +33,9 @@ $(document).ready(function() {
 ];*/
 
 var matrix = new Array();
-for(var i=0;i<x.length;i++) {
+for(var i=0;i<(x.length-1);i++) {
   matrix[i]=new Array();
-  for(var j=0;j<x[i].length;j++) {
+  for(var j=0;j<(x[i].length-1);j++) {
     matrix[i][j]=x[i+1][j+1];
   }
 }
