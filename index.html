@@ -22,7 +22,7 @@ var ss_url = "https://docs.google.com/spreadsheets/d/15UvknHaeN9wqJBVbPERuNU5BvQ
 
 $(document).ready(function() {
     $.getJSON(url+"?callback=?",{method:ss_url}, function(x){
-      alert x[1][1];
+      alert(x[1][1]);
     });
 });
 var matrix = [
