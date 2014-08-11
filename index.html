@@ -43,7 +43,7 @@ for(var i=0;i<(x.length-1);i++) {
 var labellist = new Array();
 
 for(var i=1;i<x.length;i++) {
-  labellist[i]=x[i][0];
+  labellist[i-1]=x[i][0];
 }
 
 var chord = d3.layout.chord()
