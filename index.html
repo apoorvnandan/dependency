@@ -5,6 +5,9 @@
 body {
   font: 10px sans-serif;
 }
+#detail {
+  font: 20px sans-serif;
+}
 
 .chord path {
   fill-opacity: .67;
@@ -14,6 +17,7 @@ body {
 
 </style>
 <body>
+<div id="detail">Chord Details :</div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
@@ -61,10 +65,10 @@ var fill = d3.scale.ordinal()
     .range(["#000000", "#FFDD89", "#957244", "#F26223"]);
 
 var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height)
+    .attr("width", 1.5*width)
+    .attr("height", 1.5*height)
   .append("g")
-    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    .attr("transform", "translate(" + width / 1.5 + "," + height / 1.5 + ")");
 
 svg.append("g").selectAll("path")
     .data(chord.groups)
@@ -108,8 +112,33 @@ svg.append("g")
   .enter().append("path")
     .attr("d", d3.svg.chord().radius(innerRadius))
     .style("fill", function(d) { return fill(d.target.index); })
-    .style("opacity", 1);
+    .style("opacity", 1)
+    .on("mouseover",show());
 
+function show() {
+  var index;
+  return function(g, i) {
+    svg.selectAll(".chord path")
+        .filter(function(d) {
+          var count=0; var row,col;
+          for(var x=0;x<matrix.length;x++) {
+            for(var y=x;y<matrix[x].length;y++) {
+              if(count==i) {
+                row=x; col=y;
+              }
+              count++;
+            }
+          }
+          var rowsum=0;
+          for(var y=0;y<matrix[0].length;y++) rowsum+=matrix[row][y];
+
+          document.getElementById("detail").innerHTML="Chord Details : "+Math.round((matrix[row][col]/rowsum)*10000)/100+"% "+labellist[row]+" prefer " +labellist[col];
+           return d.source.index != i && d.target.index != i; })
+        ;
+        
+  };
+  
+}
 // Returns an array of tick angles and labels, given a group.
 function groupTicks(d) {
   var k = (d.endAngle - d.startAngle) / d.value;
